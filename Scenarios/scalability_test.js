@@ -21,7 +21,13 @@ export const options = {
 };
 
 export default function () {
-    const response = http.get(`${BASE_URL}/`);
+    const response = http.get(`${BASE_URL}/`, {
+        tags: {
+            endpoint: 'homepage',
+            test_type: 'scalability',
+            environment: 'test',
+        },
+    });
 
     // As mesmas verificacoes em cada etapa permitem comparar os resultados.
     check(response, {

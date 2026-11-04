@@ -20,7 +20,13 @@ export const options = {
 };
 
 export default function () {
-    const response = http.get(`${BASE_URL}/`);
+    const response = http.get(`${BASE_URL}/`, {
+        tags: {
+            endpoint: 'homepage',
+            test_type: 'stress',
+            environment: 'test',
+        },
+    });
 
     // Cada iteracao confere se a aplicacao continua respondendo corretamente.
     check(response, {

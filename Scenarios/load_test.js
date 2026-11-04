@@ -16,7 +16,13 @@ export const options = {
 };
 
 export default function () {
-    const home = http.get(`${BASE_URL}/`);
+    const home = http.get(`${BASE_URL}/`, {
+        tags: {
+            endpoint: 'homepage',
+            test_type: 'load',
+            environment: 'test',
+        },
+    });
 
     // Confere se a pagina inicial respondeu com sucesso.
     check(home, {

@@ -16,7 +16,13 @@ export const options = {
 };
 
 export default function () {
-    const response = http.get(`${BASE_URL}/`);
+    const response = http.get(`${BASE_URL}/`, {
+        tags: {
+            endpoint: 'homepage',
+            test_type: 'soak',
+            environment: 'test',
+        },
+    });
 
     // Registra sucesso e tempo de resposta ao longo de todo o periodo.
     check(response, {

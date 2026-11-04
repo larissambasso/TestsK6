@@ -21,7 +21,13 @@ export const options = {
 };
 
 export default function () {
-    const response = http.get(`${BASE_URL}/`);
+    const response = http.get(`${BASE_URL}/`, {
+        tags: {
+            endpoint: 'homepage',
+            test_type: 'spike',
+            environment: 'test',
+        },
+    });
 
     // Mede se a pagina continua disponivel e rapida durante e depois do pico.
     check(response, {
