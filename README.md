@@ -21,7 +21,7 @@ Todos os scripts fazem requisicoes `GET` para `https://quickpizza.grafana.com/`,
 | Resistencia (soak) | [`Scenarios/soak_test.js`](Scenarios/soak_test.js) | 10 VUs por 30 minutos, para observar degradacao ao longo do tempo. |
 | Escalabilidade | [`Scenarios/scalability_test.js`](Scenarios/scalability_test.js) | Aumenta em etapas de 5, 10, 20 e 30 VUs; duracao total de 4 minutos e 30 segundos. |
 
-Cada script verifica o status HTTP e o tempo de resposta. O teste de carga tambem verifica se a resposta contem conteudo.
+Cada script verifica o status HTTP e o tempo de resposta. O teste de carga tambem verifica se a resposta contem conteudo e registra cada requisicao em um contador customizado chamado `numero_de_chamadas`.
 
 ## Como executar
 
