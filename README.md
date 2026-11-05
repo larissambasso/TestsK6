@@ -11,7 +11,7 @@ Os testes sao executados pelo CLI do k6; nao e necessario instalar dependencias 
 
 ## Cenarios
 
-Todos os scripts fazem requisicoes `GET` para `https://quickpizza.grafana.com/`, com uma pausa de um segundo entre iteracoes e as tags `endpoint: homepage`, `environment: test` e `test_type` especifica do cenario.
+Todos os scripts fazem requisicoes `GET` para `https://quickpizza.grafana.com/`. Os cenarios usam as tags `endpoint: homepage`, `environment: test` e `test_type` especificas, exceto o teste de iteracoes compartilhadas, que mantem a configuracao simples do exemplo. A maioria espera um segundo entre iteracoes; o teste de iteracoes compartilhadas espera 0,5 segundo.
 
 | Cenario | Arquivo | Perfil de carga |
 |---|---|---|
@@ -20,6 +20,7 @@ Todos os scripts fazem requisicoes `GET` para `https://quickpizza.grafana.com/`,
 | Pico (spike) | [`Scenarios/spike_test.js`](Scenarios/spike_test.js) | Sobe rapidamente de 5 para 100 VUs, mantem o pico por 1 minuto e reduz para 5; duracao total de 2 minutos e 20 segundos. |
 | Resistencia (soak) | [`Scenarios/soak_test.js`](Scenarios/soak_test.js) | 10 VUs por 30 minutos, para observar degradacao ao longo do tempo. |
 | Escalabilidade | [`Scenarios/scalability_test.js`](Scenarios/scalability_test.js) | Aumenta em etapas de 5, 10, 20 e 30 VUs; duracao total de 4 minutos e 30 segundos. |
+| Iteracoes compartilhadas | [`Scenarios/shared_iterations_test.js`](Scenarios/shared_iterations_test.js) | Distribui 200 iteracoes entre 10 VUs, com limite de 30 segundos. |
 
 Cada script verifica o status HTTP e o tempo de resposta. O teste de carga tambem verifica se a resposta contem conteudo e registra cada requisicao em um contador customizado chamado `numero_de_chamadas`.
 
@@ -33,6 +34,7 @@ k6 run .\Scenarios\stress_test.js
 k6 run .\Scenarios\spike_test.js
 k6 run .\Scenarios\soak_test.js
 k6 run .\Scenarios\scalability_test.js
+k6 run .\Scenarios\shared_iterations_test.js
 ```
 
 Os comandos executam um cenario por vez. Os perfis de estresse, pico e resistencia podem gerar carga significativa; acompanhe a execucao e interrompa-a se observar impacto indesejado no servico.
